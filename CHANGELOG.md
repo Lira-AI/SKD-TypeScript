@@ -1,5 +1,11 @@
 # lira
 
+## 0.10.0
+
+### Minor Changes
+
+- beta
+
 ## 0.9.0
 
 ### Minor Changes
