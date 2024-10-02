@@ -1,0 +1,54 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Lira docs",
+  "logo": {
+    "dark": "/logo/logo.svg",
+    "light": "/logo/logo.svg"
+  },
+  "favicon": "/logo/favicon.svg",
+  "colors": {
+    "primary": "#3730A3",
+    "light": "#818CF8",
+    "dark": "#6366F1"
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:hi@lira-ai.com"
+    }
+  ],
+  "tabs": [
+    {
+      "name": "SDK reference",
+      "url": "sdk-reference"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "SDK",
+      "pages": ["getting-started", "messages"]
+    },
+    {
+      "group": "Messages",
+      "pages": [
+        {
+          "group": "Create",
+          "pages": [
+            "sdk-reference/messages/input",
+            {
+              "group": "Output",
+              "pages": [
+                "sdk-reference/messages/output/static",
+                "sdk-reference/messages/output/stream"
+              ]
+            }
+          ]
+        },
+        "sdk-reference/messages/store"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/Lira-AI/SKD-TypeScript"
+  }
+}

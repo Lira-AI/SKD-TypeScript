@@ -1,0 +1,10 @@
+/node_modules
+**/.tgz
+.prettierrc.json
+.eslintrc.json
+.gitignore
+.prettierignore
+CHANGELOG.md
+tsconfig.json
+tsup.config.ts
+yarn.lock

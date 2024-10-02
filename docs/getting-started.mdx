@@ -1,0 +1,132 @@
+---
+title: Getting started
+---
+
+## Installation
+
+<CodeGroup>
+```yarn yarn
+yarn add lira
+```
+
+```pnpm pnpm
+pnpm add lira
+```
+
+```npm npm
+npm install lira
+```
+
+</CodeGroup>
+
+## Prerequisites
+
+Make sure to install the SDK of the providers you want to use:
+
+<CodeGroup>
+```yarn yarn
+yarn add openai
+yarn add @anthropic-ai/sdk
+```
+
+```pnpm pnpm
+pnpm add openai
+pnpm add @anthropic-ai/sdk
+```
+
+```npm npm
+npm install openai
+npm install @anthropic-ai/sdk
+```
+
+</CodeGroup>
+
+## Lira instance
+
+Create an instance of the `Lira` class
+
+```ts index.ts
+import { Lira } from 'lira'
+
+const lira = new Lira()
+```
+
+### Options
+
+The `Lira` constructor accepts an options object with the following properties:
+
+<ParamField body="keys" name="keys" type="object">
+Set the API keys for the providers you want to use
+  <Expandable title="properties">
+
+    {/* <ParamField body="lira" name="lira" type="string">
+      Lira API key (in case you want to use Lira store endpoint)
+    </ParamField> */}
+
+    <ParamField body="anthropic" name="anthropic" type="string">
+      Anthropic API key
+    </ParamField>
+
+    <ParamField body="openai" name="openai" type="string">
+      OpenAI API key
+    </ParamField>
+
+  </Expandable>
+</ParamField>
+
+<ParamField body="store" name="keys" type="object">
+Options to configure the storing of the messages.
+  <Expandable title="properties">
+
+    <ParamField body="enabled" name="enabled" type="boolean" default="false">
+      Set to `true` to enable the storing of the messages.
+    </ParamField>
+
+    <ParamField body="callback" name="callback" type="(params: LiraMessageStore) => unkown" required>
+      Your custom callback to store the entire message object. The callback receives the following object as `params`:
+      ```typescript
+      {
+        input: LiraMessageInputStore
+        output?: LiraMessageOutputStore
+        reqTime?: LiraMessageReqTimesStore
+        error?: unknown
+      }
+      ```
+    </ParamField>
+
+  </Expandable>
+</ParamField>
+
+<ParamField body="loggers" name="loggers" type="object">
+Configure the way Lira logs messages
+  <Expandable title="properties">
+
+    <ParamField body="type" name="type" type='"prod" | "debug"' default="prod">
+      Set to `debug` to enable the debug mode and see raw requests and responses to the providers
+    </ParamField>
+
+    <ParamField body="config" name="config" type="object" default="console.log()">
+      Setting a custom callback lets you log the messages with your own monitoring system.
+      <Expandable title="properties">
+
+        <ParamField body="all" name="all" type="(...messages: Array<string>) => void">
+          Callback to log all messages (will override the other callbacks)
+        </ParamField>
+
+        <ParamField body="debug" name="debug" type="(...messages: Array<string>) => void">
+          Callback to log debug messages
+        </ParamField>
+
+        <ParamField body="warn" name="warn" type="(...messages: Array<string>) => void">
+          Callback to log warn messages
+        </ParamField>
+
+        <ParamField body="error" name="error" type="(...messages: Array<string>) => void">
+          Callback to log error messages
+        </ParamField>
+
+      </Expandable>
+    </ParamField>
+
+  </Expandable>
+</ParamField>
