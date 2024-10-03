@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { Message, RawMessageStreamEvent } from '@anthropic-ai/sdk/resources'
 import { Stream } from '@anthropic-ai/sdk/streaming'
-import { chatInputLiraToAntrhopic } from './input/converters/liraToAnthropic'
+import { chatInputLiraToAntrhopic } from './input/converters/lira-to-anthropic'
 import { streamOutputConverter } from './output/converters/stream'
 import { aggregator, endBuffering, startBuffering } from './output/utils/buffer'
 import { filterMessageStopType } from './output/utils/filter'

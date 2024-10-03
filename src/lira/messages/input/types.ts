@@ -45,6 +45,7 @@ export namespace LiraMessageInput {
       result: LiraMessage.TextMessageData
       name: string
     }
+    is_error?: boolean
   }
 
   export type SystemMessage = {
@@ -83,7 +84,6 @@ export namespace LiraMessageInput {
   export type ToolResultMessage = {
     role: typeof ROLES.TOOL_RESULT
     tools: Array<ToolResultMessageData>
-    is_error?: boolean
   }
 
   export type Message =
@@ -117,7 +117,7 @@ export namespace LiraMessageInput {
       description?: string
       name: string
       schema?: Record<string, unknown>
-      strict?: boolean
+      strict?: boolean | null
     }
   }
 

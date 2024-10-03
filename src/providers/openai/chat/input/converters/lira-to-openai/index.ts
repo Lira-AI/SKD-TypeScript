@@ -9,7 +9,7 @@ import {
 import { LiraError } from '@lira/commons/utils/errors'
 import { LiraMessageInput } from '@lira/messages/input/types'
 
-export function openAIChatInputConverter(
+export function chatInputLiraToOpenAI(
   inputParams: LiraMessageInput.Params
 ): OpenAI.Chat.ChatCompletionCreateParams {
   const streamOptions = inputParams.openai_options?.stream_options
