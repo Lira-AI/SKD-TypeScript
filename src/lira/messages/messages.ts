@@ -3,18 +3,16 @@ import { anthropicChat } from '@providers/anthropic/chat/chat'
 import { openAIChat } from '@providers/openai/chat/chat'
 import { isOpenAIModel } from '@providers/openai/utils'
 import { LiraError } from '@lira/commons/utils/errors'
-import { LiraLogger } from '@lira/commons/utils/logger'
 import { LiraMessageInput } from './input/types'
-import { formatStreamToStore } from './output/store/store'
 import { tee } from './output/stream/utils/tee'
 import { LiraMessageOutput } from './output/types'
 import { LiraMessageInputStore } from './input/store/types'
-import { LiraInstanceParams } from '..'
+import { Lira, LiraInstanceParams } from '..'
 
 export class Messages {
   constructor(
-    private readonly keys: LiraInstanceParams['keys'],
-    private readonly store: LiraInstanceParams['store']
+    private readonly lira: Lira,
+    private readonly keys: LiraInstanceParams['keys']
   ) {}
 
   async create(
@@ -69,7 +67,7 @@ export class Messages {
           resToStore = llmRes
         }
 
-        this.#store({
+        this.lira.store.create({
           input: formattedInput,
           output: resToStore,
           reqTime,
@@ -112,7 +110,7 @@ export class Messages {
         }
 
         // not await to avoid blocking the main thread
-        this.#store({
+        this.lira.store.create({
           input: formattedInput,
           output: resToStore,
           reqTime,
@@ -124,55 +122,12 @@ export class Messages {
       throw new LiraError('Model not supported')
     } catch (error) {
       // not await to avoid blocking the main thread
-      this.#store({
+      this.lira.store.create({
         input: formattedInput,
         error,
       })
 
       throw error
-    }
-  }
-
-  async #store({
-    input,
-    output,
-    error,
-    reqTime,
-  }: {
-    input: LiraMessageInputStore
-    reqTime?: LiraMessageOutput.RequestTime
-    output?:
-      | LiraMessageOutput.Static.Response
-      | AsyncIterable<LiraMessageOutput.Stream.Response>
-    error?: unknown
-  }) {
-    if (!this.store?.enabled) {
-      return
-    }
-
-    const storeCallback = this.store?.callback
-
-    if (!storeCallback) {
-      throw new LiraError('Store callback is required to store messages')
-    }
-
-    try {
-      const formattedOutput = input.stream
-        ? await formatStreamToStore(
-            output as AsyncIterable<LiraMessageOutput.Stream.Response>
-          )
-        : (output as LiraMessageOutput.Static.Response)
-
-      const data = {
-        input,
-        output: { ...formattedOutput },
-        reqTime,
-        error,
-      }
-
-      await storeCallback(data)
-    } catch (error) {
-      LiraLogger.error('Failed to store message', error)
     }
   }
 }

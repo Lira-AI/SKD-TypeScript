@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { Message, RawMessageStreamEvent } from '@anthropic-ai/sdk/resources'
 import { Stream } from '@anthropic-ai/sdk/streaming'
-import { anthropicChatInputConverter } from './input/converter'
+import { chatInputLiraToAntrhopic } from './input/converters/liraToAnthropic'
 import { streamOutputConverter } from './output/converters/stream'
 import { aggregator, endBuffering, startBuffering } from './output/utils/buffer'
 import { filterMessageStopType } from './output/utils/filter'
@@ -15,7 +15,7 @@ export const anthropicChat: LiraProviders.Chat = async (
   anthropicApiKey,
   input
 ) => {
-  const formattedInput = anthropicChatInputConverter(input)
+  const formattedInput = chatInputLiraToAntrhopic(input)
 
   LiraLogger.debug('Anthropic Input', formattedInput)
 
