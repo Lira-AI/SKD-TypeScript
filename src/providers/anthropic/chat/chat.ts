@@ -2,14 +2,14 @@ import Anthropic from '@anthropic-ai/sdk'
 import { Message, RawMessageStreamEvent } from '@anthropic-ai/sdk/resources'
 import { Stream } from '@anthropic-ai/sdk/streaming'
 import { chatInputLiraToAntrhopic } from './input/converters/lira-to-anthropic'
-import { streamOutputConverter } from './output/converters/stream'
 import { aggregator, endBuffering, startBuffering } from './output/utils/buffer'
 import { filterMessageStopType } from './output/utils/filter'
-import { staticOutputConverter } from './output/converters/static'
 import { LiraProviders } from '../../types'
 import { LiraLogger } from '@lira/commons/utils/logger'
 import { convertStream } from '@lira/messages/output/stream'
 import { LiraError } from '@lira/commons/utils/errors'
+import { streamOutputConverter } from './output/converters/anthropic-to-lira/stream'
+import { staticOutputConverter } from './output/converters/anthropic-to-lira/static'
 
 export const anthropicChat: LiraProviders.Chat = async (
   anthropicApiKey,

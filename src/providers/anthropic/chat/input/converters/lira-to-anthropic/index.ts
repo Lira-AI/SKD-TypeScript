@@ -113,7 +113,7 @@ function formatMessage(
           type: 'tool_result',
           tool_use_id: toolResultData.data.name,
           content: toolResultData.data.result,
-          is_error: message.is_error,
+          is_error: toolResultData.is_error,
         })),
       }
 

@@ -1,12 +1,12 @@
 import OpenAI from 'openai'
 import type { Stream } from 'openai/streaming'
 import { chatInputLiraToOpenAI } from './input/converters/lira-to-openai'
-import { streamOutputConverter } from './output/converters/stream'
-import { staticOutputConverter } from './output/converters/static'
 import { LiraProviders } from '../../types'
 import { LiraLogger } from '@lira/commons/utils/logger'
 import { convertStream } from '@lira/messages/output/stream'
 import { LiraError } from '@lira/commons/utils/errors'
+import { streamOutputConverter } from './output/converters/openai-to-lira/stream'
+import { staticOutputConverter } from './output/converters/openai-to-lira/static'
 
 export const openAIChat: LiraProviders.Chat = async (openAIKey, input) => {
   const openaiFormattedInput = chatInputLiraToOpenAI(input)
