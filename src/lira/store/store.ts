@@ -1,14 +1,22 @@
-import { LiraMessageInputStore } from '@lira/messages/input/store/types'
 import { LiraMessageOutput } from '@lira/messages/output/types'
-import { LiraInstanceParams } from '..'
+import { Lira, LiraInstanceParams } from '..'
 import { LiraError } from '@lira/commons/utils/errors'
-import { formatStreamToStore } from '@lira/messages/output/store/store'
+import { formatMessageStreamToStore } from '@lira/store/message/formatters'
 import { LiraLogger } from '@lira/commons/utils/logger'
+import { LiraMessageInputStore } from '../..'
+import { Providers } from './providers/providers'
 
 export class Store {
-  constructor(private readonly store: LiraInstanceParams['store']) {}
+  public providers: Providers
 
-  async create({
+  constructor(
+    private readonly lira: Lira,
+    private readonly store: LiraInstanceParams['store']
+  ) {
+    this.providers = new Providers(this.lira)
+  }
+
+  async message({
     input,
     output,
     error,
@@ -33,7 +41,7 @@ export class Store {
 
     try {
       const formattedOutput = input.stream
-        ? await formatStreamToStore(
+        ? await formatMessageStreamToStore(
             output as AsyncIterable<LiraMessageOutput.Stream.Response>
           )
         : (output as LiraMessageOutput.Static.Response)

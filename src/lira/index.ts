@@ -1,8 +1,8 @@
 import { LiraCommons } from './commons/types'
 import { LiraLogger } from './commons/utils/logger'
-import { LiraMessage } from './messages/commons/types'
 import { Messages } from './messages/messages'
 import { Store } from './store/store'
+import { LiraStore } from './store/types'
 
 export type LiraInstanceParams = {
   keys: {
@@ -11,7 +11,7 @@ export type LiraInstanceParams = {
   }
   store?: {
     enabled: boolean
-    callback?: (params: LiraMessage.Store) => unknown
+    callback?: LiraStore.Callback
   }
   loggers?: {
     type?: LiraCommons.Logger
@@ -31,6 +31,6 @@ export class Lira {
     })
 
     this.messages = new Messages(this, params.keys)
-    this.store = new Store(params.store)
+    this.store = new Store(this, params.store)
   }
 }

@@ -1,7 +1,7 @@
 import { LiraMessageInput as NS_LiraMessageInput } from '@lira/messages/input/types'
 import { LiraMessageOutput as NS_LiraMessageOutput } from '@lira/messages/output/types'
 import { LiraProviders as NS_LiraProviders } from '@providers/types'
-import { LiraMessage } from '@lira/messages/commons/types'
+import { LiraStore } from '@lira/store/types'
 
 export { Lira } from '@lira/index'
 
@@ -10,10 +10,10 @@ export type LiraMessageOutput =
   | NS_LiraMessageOutput.Static.Response
   | NS_LiraMessageOutput.Stream.Response
 
-export { LiraMessageInputStore } from '@lira/messages/input/store/types'
-export { LiraMessageOutputStore } from '@lira/messages/output/store/types'
-export { LiraMessageReqTimesStore } from '@lira/messages/output/store/types'
-export type LiraMessageStore = LiraMessage.Store
+export type LiraMessageInputStore = LiraStore.InputStore
+export type LiraMessageOutputStore = LiraStore.OutputStore
+export type LiraMessageReqTimesStore = LiraStore.ReqTimesStore
+export type LiraMessageStore = LiraStore.MessageObj
 
 export {
   OPENAI_MODELS,

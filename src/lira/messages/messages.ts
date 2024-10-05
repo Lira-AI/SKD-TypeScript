@@ -6,8 +6,8 @@ import { LiraError } from '@lira/commons/utils/errors'
 import { LiraMessageInput } from './input/types'
 import { tee } from './output/stream/utils/tee'
 import { LiraMessageOutput } from './output/types'
-import { LiraMessageInputStore } from './input/store/types'
 import { Lira, LiraInstanceParams } from '..'
+import { LiraStore } from '@lira/store/types'
 
 export class Messages {
   constructor(
@@ -29,7 +29,7 @@ export class Messages {
     | LiraMessageOutput.Static.Response
     | AsyncIterable<LiraMessageOutput.Stream.Response>
   > {
-    let formattedInput: LiraMessageInputStore = input
+    let formattedInput: LiraStore.InputStore = input
 
     try {
       if (isAnthropicModel(input.model)) {
@@ -67,7 +67,7 @@ export class Messages {
           resToStore = llmRes
         }
 
-        this.lira.store.create({
+        this.lira.store.message({
           input: formattedInput,
           output: resToStore,
           reqTime,
@@ -110,7 +110,7 @@ export class Messages {
         }
 
         // not await to avoid blocking the main thread
-        this.lira.store.create({
+        this.lira.store.message({
           input: formattedInput,
           output: resToStore,
           reqTime,
@@ -122,7 +122,7 @@ export class Messages {
       throw new LiraError('Model not supported')
     } catch (error) {
       // not await to avoid blocking the main thread
-      this.lira.store.create({
+      this.lira.store.message({
         input: formattedInput,
         error,
       })
