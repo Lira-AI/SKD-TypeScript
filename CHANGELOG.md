@@ -1,5 +1,11 @@
 # lira
 
+## 0.11.0
+
+### Minor Changes
+
+- unopinionated store
+
 ## 0.10.0
 
 ### Minor Changes
