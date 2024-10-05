@@ -1,8 +1,9 @@
+import { LiraInstanceParams } from '@lira/index'
 import { ANTHROPIC_MODELS, OPENAI_MODELS, ROLES } from '../commons/constants'
 import { LiraMessage } from '../commons/types'
 
 export namespace LiraMessageInput {
-  export type Metadata = {
+  export type LiraMetadata = {
     endUser?: {
       id: string
       name?: string
@@ -10,6 +11,7 @@ export namespace LiraMessageInput {
     }
     sessionId?: string
     tags?: string[]
+    store?: LiraInstanceParams['store']
   }
 
   /**
@@ -145,13 +147,13 @@ export namespace LiraMessageInput {
   }
 
   export type Params = {
+    lira?: LiraMetadata
     /**
      * Defaults to 2000
      */
     max_tokens?: number
     model: AnthropicModels | OpenAIModels
     messages: Array<Message>
-    metadata?: Metadata
     /**
      * Value between 0 and 1. Defaults to 0.5
      */

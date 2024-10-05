@@ -1,5 +1,11 @@
 # lira
 
+## 0.13.0
+
+### Minor Changes
+
+- new store options with instance and method controls + lira endpoint
+
 ## 0.12.0
 
 ### Minor Changes

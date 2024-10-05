@@ -31,8 +31,8 @@ export function chatInputLiraToAntrhopic(
         : formatTools(inputParams.tools),
     top_k: inputParams.anthropic_options?.top_k,
     top_p: inputParams.top_p,
-    ...(inputParams.metadata?.endUser?.passIdToUnderlyingLLM && {
-      end_user: inputParams.metadata.endUser.id,
+    ...(inputParams.lira?.endUser?.passIdToUnderlyingLLM && {
+      end_user: inputParams.lira.endUser.id,
     }),
   }
 }

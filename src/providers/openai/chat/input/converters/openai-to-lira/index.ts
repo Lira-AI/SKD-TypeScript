@@ -14,7 +14,7 @@ export function chatInputOpenAIToLira(
     max_tokens: inputParams.max_tokens ?? undefined,
     messages: formatInputMessages(inputParams),
     model: inputParams.model as LiraMessageInput.Params['model'],
-    metadata: {
+    lira: {
       ...(inputParams.user && {
         endUser: {
           passIdToUnderlyingLLM: true,

@@ -1,6 +1,6 @@
 export class LiraError extends Error {
-  constructor(message: string) {
-    super(message)
+  constructor(...messages: Array<string>) {
+    super(messages.join(' '))
     this.name = 'Lira'
   }
 }

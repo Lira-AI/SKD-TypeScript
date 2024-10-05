@@ -17,7 +17,7 @@ export function chatInputAntrhopicToLira(
     max_tokens: inputParams.max_tokens,
     messages: formatInputMessages(inputParams),
     model: inputParams.model as LiraMessageInput.Params['model'],
-    metadata: {
+    lira: {
       ...(inputParams.metadata?.user_id && {
         endUser: {
           passIdToUnderlyingLLM: true,

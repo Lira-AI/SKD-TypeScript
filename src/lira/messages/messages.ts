@@ -12,7 +12,8 @@ import { LiraStore } from '@lira/store/types'
 export class Messages {
   constructor(
     private readonly lira: Lira,
-    private readonly keys: LiraInstanceParams['keys']
+    private readonly keys: LiraInstanceParams['keys'],
+    private readonly store: LiraInstanceParams['store']
   ) {}
 
   async create(
@@ -30,6 +31,8 @@ export class Messages {
     | AsyncIterable<LiraMessageOutput.Stream.Response>
   > {
     let formattedInput: LiraStore.InputStore = input
+
+    const isToStore = input.lira?.store?.enabled ?? this.store?.enabled
 
     try {
       if (isAnthropicModel(input.model)) {
@@ -67,11 +70,14 @@ export class Messages {
           resToStore = llmRes
         }
 
-        this.lira.store.message({
-          input: formattedInput,
-          output: resToStore,
-          reqTime,
-        })
+        if (isToStore) {
+          // not await to avoid blocking the main thread
+          this.lira.store.message({
+            input: formattedInput,
+            output: resToStore,
+            reqTime,
+          })
+        }
 
         return outputRes
       }
@@ -109,23 +115,27 @@ export class Messages {
           resToStore = llmRes
         }
 
-        // not await to avoid blocking the main thread
-        this.lira.store.message({
-          input: formattedInput,
-          output: resToStore,
-          reqTime,
-        })
+        if (isToStore) {
+          // not await to avoid blocking the main thread
+          this.lira.store.message({
+            input: formattedInput,
+            output: resToStore,
+            reqTime,
+          })
+        }
 
         return outputRes
       }
 
       throw new LiraError('Model not supported')
     } catch (error) {
-      // not await to avoid blocking the main thread
-      this.lira.store.message({
-        input: formattedInput,
-        error,
-      })
+      if (isToStore) {
+        // not await to avoid blocking the main thread
+        this.lira.store.message({
+          input: formattedInput,
+          error,
+        })
+      }
 
       throw error
     }

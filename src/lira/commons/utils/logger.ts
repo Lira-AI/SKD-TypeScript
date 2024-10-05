@@ -78,7 +78,7 @@ export class LiraLogger {
   ): void {
     console[type](
       '\x1b[1m\x1b[38;5;153m\x1b[48;5;93m%s\x1b[0m',
-      `Lira ${type}`,
+      `Lira ${type}:`,
       ...messages
     )
   }

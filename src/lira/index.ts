@@ -6,16 +6,17 @@ import { LiraStore } from './store/types'
 
 export type LiraInstanceParams = {
   keys: {
+    lira?: string
     anthropic?: string
     openAI?: string
-  }
-  store?: {
-    enabled: boolean
-    callback?: LiraStore.Callback
   }
   loggers?: {
     type?: LiraCommons.Logger
     config?: LiraCommons.LoggerConfig
+  }
+  store?: {
+    enabled: boolean
+    callback?: LiraStore.Callback
   }
 }
 
@@ -30,7 +31,7 @@ export class Lira {
       loggers: params.loggers?.config,
     })
 
-    this.messages = new Messages(this, params.keys)
-    this.store = new Store(this, params.store)
+    this.messages = new Messages(this, params.keys, params.store)
+    this.store = new Store(this, params.store, params.keys.lira)
   }
 }

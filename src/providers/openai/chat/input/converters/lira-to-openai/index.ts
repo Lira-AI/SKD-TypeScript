@@ -41,8 +41,8 @@ export function chatInputLiraToOpenAI(
       : undefined,
     top_logprobs: inputParams.openai_options?.top_logprobs,
     top_p: inputParams.top_p,
-    ...(inputParams.metadata?.endUser?.passIdToUnderlyingLLM && {
-      user: inputParams.metadata.endUser.id,
+    ...(inputParams.lira?.endUser?.passIdToUnderlyingLLM && {
+      user: inputParams.lira.endUser.id,
     }),
   } satisfies OpenAI.Chat.ChatCompletionCreateParams
 }

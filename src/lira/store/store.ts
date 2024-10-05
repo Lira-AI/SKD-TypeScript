@@ -4,8 +4,9 @@ import { LiraError } from '@lira/commons/utils/errors'
 import { formatMessageStreamToStore } from '@lira/store/message/formatters'
 import { LiraLogger } from '@lira/commons/utils/logger'
 import { LiraMessageInputStore } from '../..'
-import { StoreAnthropic } from './providers/anthropic/anthropic'
-import { StoreOpenAI } from './providers/openai/openai'
+import { PACKAGE_ENDPOINT } from '@endpoints'
+import { StoreAnthropic } from '@providers/anthropic/store/store'
+import { StoreOpenAI } from '@providers/openai/store/store'
 
 export class Store {
   public anthropic: StoreAnthropic
@@ -14,7 +15,8 @@ export class Store {
 
   constructor(
     private readonly lira: Lira,
-    private readonly store: LiraInstanceParams['store']
+    private readonly store: LiraInstanceParams['store'],
+    private readonly liraAPIKey?: string
   ) {
     this.anthropic = new StoreAnthropic(this.lira)
     this.openai = new StoreOpenAI(this.lira)
@@ -32,17 +34,7 @@ export class Store {
       | LiraMessageOutput.Static.Response
       | AsyncIterable<LiraMessageOutput.Stream.Response>
     error?: unknown
-  }) {
-    if (!this.store?.enabled) {
-      return
-    }
-
-    const storeCallback = this.store?.callback
-
-    if (!storeCallback) {
-      throw new LiraError('Store callback is required to store messages')
-    }
-
+  }): Promise<void> {
     try {
       const formattedOutput = input.stream
         ? await formatMessageStreamToStore(
@@ -52,14 +44,46 @@ export class Store {
 
       const data = {
         input,
-        output: { ...formattedOutput },
+        output: formattedOutput,
         reqTime,
         error,
       }
 
-      await storeCallback(data)
+      if (this.store?.callback) {
+        try {
+          await this.store?.callback(data)
+
+          LiraLogger.debug(`Message stored successfully with callback.`)
+
+          return
+        } catch (error) {
+          throw new LiraError(
+            `Calling store callback ${this.store?.callback.name} failed:\n`,
+            JSON.stringify(error, null, 2)
+          )
+        }
+      }
+
+      if (!this.liraAPIKey) {
+        throw new LiraError(
+          `Lira API key is required to store messages to Lira endpoint. Current key is ${this.liraAPIKey}`
+        )
+      }
+
+      try {
+        await PACKAGE_ENDPOINT.STORE_MESSAGE(this.liraAPIKey, data)
+
+        LiraLogger.debug(`Message stored successfully to Lira endpoint.`)
+
+        return
+      } catch (error) {
+        throw new LiraError(
+          `Lira endpoint failed:\n`,
+          JSON.stringify(error, null, 2)
+        )
+      }
     } catch (error) {
-      LiraLogger.error('Failed to store message', error)
+      LiraLogger.error(`Error while storing message.`, error)
     }
   }
 }
