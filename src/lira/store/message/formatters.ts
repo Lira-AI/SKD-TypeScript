@@ -1,9 +1,9 @@
-import { LiraMessageOutput } from '../types'
-import { LiraMessageOutputStore } from './types'
+import { LiraMessageOutput } from '../../messages/output/types'
+import { LiraStore } from '../types'
 
-export async function formatStreamToStore(
+export async function formatMessageStreamToStore(
   output: AsyncIterable<LiraMessageOutput.Stream.Response>
-): Promise<Omit<LiraMessageOutputStore, 'reqTimes'>> {
+): Promise<Omit<LiraStore.OutputStore, 'reqTimes'>> {
   const formattedOutputMessages: Array<LiraMessageOutput.Stream.Response> = []
 
   for await (const message of output) {
@@ -11,7 +11,7 @@ export async function formatStreamToStore(
   }
 
   const formattedOutput = formattedOutputMessages.reduce(
-    (aggregatedOutput: LiraMessageOutputStore, chunk) => {
+    (aggregatedOutput: LiraStore.OutputStore, chunk) => {
       aggregatedOutput = {
         id: aggregatedOutput?.id ?? chunk.id,
         model: aggregatedOutput?.model ?? chunk.model,
@@ -45,7 +45,7 @@ export async function formatStreamToStore(
 
       return aggregatedOutput
     },
-    {} as LiraMessageOutputStore
+    {} as LiraStore.OutputStore
   )
 
   return formattedOutput
@@ -55,9 +55,9 @@ function formatMessage({
   outputChoice,
   chunkChoice,
 }: {
-  outputChoice: LiraMessageOutputStore['message']
+  outputChoice: LiraStore.OutputStore['message']
   chunkChoice: LiraMessageOutput.Stream.Response['message']
-}): LiraMessageOutputStore['message'] {
+}): LiraStore.OutputStore['message'] {
   if (chunkChoice.role === 'assistant' && outputChoice.role === 'assistant') {
     if (!chunkChoice.content) {
       return {

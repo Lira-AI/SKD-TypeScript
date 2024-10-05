@@ -13,7 +13,7 @@ type NewMessageParam = {
   content: ExcludeString<MessageParam['content']>
 }
 
-export function anthropicChatInputConverter(
+export function chatInputLiraToAntrhopic(
   inputParams: LiraMessageInput.Params
 ): MessageCreateParamsBase {
   return {
@@ -45,7 +45,7 @@ function formatInputMessages(
   )
 
   const formattedMessages: Array<NewMessageParam> = []
-  const equalRoleMessages: Array<LiraMessageInput.Params['messages'][0]> = []
+  const equalRoleMessages: LiraMessageInput.Params['messages'] = []
 
   const flushEqualRoleMessages = () => {
     if (equalRoleMessages.length === 0) {
@@ -57,8 +57,8 @@ function formatInputMessages(
     equalRoleMessages.length = 0
   }
 
-  for (const currentMessage of messagesExceptSystem) {
-    const lastMessage = equalRoleMessages?.at(-1)
+  messagesExceptSystem.forEach((currentMessage, currentMessageIndex) => {
+    const lastMessage = messagesExceptSystem.at(currentMessageIndex - 1)
 
     if (lastMessage?.role === currentMessage.role) {
       equalRoleMessages.push(currentMessage)
@@ -66,7 +66,7 @@ function formatInputMessages(
       flushEqualRoleMessages()
       equalRoleMessages.push(currentMessage)
     }
-  }
+  })
 
   flushEqualRoleMessages()
 
@@ -113,7 +113,7 @@ function formatMessage(
           type: 'tool_result',
           tool_use_id: toolResultData.data.name,
           content: toolResultData.data.result,
-          is_error: message.is_error,
+          is_error: toolResultData.is_error,
         })),
       }
 
