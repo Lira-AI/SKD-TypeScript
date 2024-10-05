@@ -4,16 +4,20 @@ import { LiraError } from '@lira/commons/utils/errors'
 import { formatMessageStreamToStore } from '@lira/store/message/formatters'
 import { LiraLogger } from '@lira/commons/utils/logger'
 import { LiraMessageInputStore } from '../..'
-import { Providers } from './providers/providers'
+import { StoreAnthropic } from './providers/anthropic/anthropic'
+import { StoreOpenAI } from './providers/openai/openai'
 
 export class Store {
-  public providers: Providers
+  public anthropic: StoreAnthropic
+
+  public openai: StoreOpenAI
 
   constructor(
     private readonly lira: Lira,
     private readonly store: LiraInstanceParams['store']
   ) {
-    this.providers = new Providers(this.lira)
+    this.anthropic = new StoreAnthropic(this.lira)
+    this.openai = new StoreOpenAI(this.lira)
   }
 
   async message({
