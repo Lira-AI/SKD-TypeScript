@@ -3,6 +3,19 @@ title: Getting started
 mode: 'wide'
 ---
 
+<CardGroup cols={2}>
+  <Card title="Generate and store" icon="bolt-auto" href="/message">
+    Use Lira to generate responses and store them seamlessly. Simply select one
+    of the supported LLM providers to create and save messages in one integrated
+    step
+  </Card>
+  <Card title="Store" icon="rectangle-history-circle-plus" href="/store">
+    Leverage any LLM provider directly to generate responses while using Lira
+    solely for storing messages. This option offers flexibility by separating
+    generation and storage functions
+  </Card>
+</CardGroup>
+
 ## Installation
 
 <CodeGroup>
@@ -84,7 +97,7 @@ Options to configure the storing of the message.
       Set to `true` to enable the storing of the message.
     </ParamField>
 
-    <ParamField body="callback" name="callback" type="(params: LiraMessageStore) => unkown">
+    <ParamField body="callback" name="callback" type="(params: LiraMessageStore) => Promise<void> | void">
     Only if you want to use your custom callback to store the entire message object. The callback receives the following object as `params`:
     ```typescript
     {
@@ -94,7 +107,7 @@ Options to configure the storing of the message.
       error?: unknown
     }
     ```
-    Visit the [store reference](/sdk-references/store/message#params) for more information.
+    Visit the [SDK store message](/sdk-references/store/message#params) for more information.
     </ParamField>
 
   </Expandable>
@@ -109,22 +122,22 @@ Configure the way Lira logs messages
     </ParamField>
 
     <ParamField body="config" name="config" type="object" default="console.log()">
-      Setting a custom callback lets you log the messages with your own monitoring system.
+      Setting a custom callback lets you log the messages with your own monitoring system. Otherwise it will use `console.log()`
       <Expandable title="properties">
 
-        <ParamField body="all" name="all" type="(...messages: Array<string>) => void">
+        <ParamField body="all" name="all" type="(message: string) => Promise<void> | void">
           Callback to log all messages (will override the other callbacks)
         </ParamField>
 
-        <ParamField body="debug" name="debug" type="(...messages: Array<string>) => void">
+        <ParamField body="debug" name="debug" type="(message: string) => Promise<void> | void">
           Callback to log debug messages
         </ParamField>
 
-        <ParamField body="warn" name="warn" type="(...messages: Array<string>) => void">
+        <ParamField body="warn" name="warn" type="(message: string) => Promise<void> | void">
           Callback to log warn messages
         </ParamField>
 
-        <ParamField body="error" name="error" type="(...messages: Array<string>) => void">
+        <ParamField body="error" name="error" type="(message: string) => Promise<void> | void">
           Callback to log error messages
         </ParamField>
 

@@ -188,7 +188,7 @@ The following options are the object that you can pass to the `create` method.
 
 <ParamField body="metadata" name="metadata" type="LiraMetadata">
 All this information are useful for tracking the usage of the API.
-<Note>Only if you set the `passIdToUnderlyingLLM` to `true`, the `endUser.id` will be passed to the underlying provider. Otherwise none of the information will be passed to the provider.</Note>
+<Note>Only if you set the `passIdToUnderlyingLLM` to `true`, the `endUser.id` will be passed to the underlying provider. The other info will NEVER be passed to the underlying provider.</Note>
 ```typescript
 {
   endUser?: {

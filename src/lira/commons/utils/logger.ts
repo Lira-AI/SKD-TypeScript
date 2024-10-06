@@ -33,43 +33,47 @@ export class LiraLogger {
     return LiraLogger.#instance
   }
 
-  static debug(...messages: Array<string | unknown>): void {
+  static async debug(...messages: Array<string | unknown>): Promise<void> {
     const logger = LiraLogger.#getInstance()
-    const formattedMessages = logger.#formatMessages(messages)
+    const formattedMessage = logger.#formatMessages(messages)
 
     if (logger.type === 'debug') {
-      logger.#log('debug', ...formattedMessages)
+      return logger.#log('debug', formattedMessage)
     }
+
+    return
   }
 
-  static error(...messages: Array<string | unknown>): void {
+  static async error(...messages: Array<string | unknown>): Promise<void> {
     const logger = LiraLogger.#getInstance()
-    const formattedMessages = logger.#formatMessages(messages)
-    logger.#log('error', ...formattedMessages)
+    const formattedMessage = logger.#formatMessages(messages)
+    return logger.#log('error', formattedMessage)
   }
 
-  static warn(...messages: Array<string | unknown>): void {
+  static async warn(...messages: Array<string | unknown>): Promise<void> {
     const logger = LiraLogger.#getInstance()
-    const formattedMessages = logger.#formatMessages(messages)
-    logger.#log('warn', ...formattedMessages)
+    const formattedMessage = logger.#formatMessages(messages)
+    return logger.#log('warn', formattedMessage)
   }
 
-  #log(type: 'debug' | 'error' | 'warn', ...messages: Array<string>): void {
+  async #log(type: 'debug' | 'error' | 'warn', message: string): Promise<void> {
     if (this.#loggers?.all) {
-      return this.#loggers.all(...messages)
+      return this.#loggers.all(message)
     }
 
     if (this.#loggers?.[type]) {
-      return this.#loggers[type]!(...messages)
+      return this.#loggers[type]!(message)
     }
 
-    return this.#consoleLogger(type, ...messages)
+    return this.#consoleLogger(type, message)
   }
 
-  #formatMessages(messages: Array<string | unknown>): Array<string> {
-    return messages.map((message) =>
-      typeof message === 'string' ? message : JSON.stringify(message, null, 2)
-    )
+  #formatMessages(messages: Array<string | unknown>): string {
+    return messages
+      .map((message) =>
+        typeof message === 'string' ? message : JSON.stringify(message, null, 2)
+      )
+      .join(' ')
   }
 
   #consoleLogger(

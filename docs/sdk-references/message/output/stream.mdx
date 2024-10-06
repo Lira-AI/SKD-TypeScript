@@ -34,12 +34,12 @@ for await (const message of res) {
 }
 ```
 
-<b>[👉 Response object](/sdk-reference/messages/output/static)</b>
-<br />
 The response object is the same as the one used in the static output. The only
-difference is that the `id` and `model` fields are optional.
-<br />
+difference is that the `id` and `model` fields are optional.<br/>
 This is because the streaming response object is not the final response object.
 It's a partial response object that will be updated as the model generates more
 tokens. So the `id` and `model` fields might be generated at any step in the
 stream.
+
+<br />
+<b>[👉 Static response object](/sdk-reference/message/output/static)</b>

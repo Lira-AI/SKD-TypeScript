@@ -3,7 +3,7 @@ import { LiraMessageOutput } from '@lira/message/output/types'
 import { LiraMessageInput } from '@lira/message/input/types'
 
 export namespace LiraStore {
-  export type Callback = (data: MessageObj) => Promise<void>
+  export type Callback = (data: MessageObj) => Promise<void> | void
 
   export type MessageObj = {
     input: InputStore

@@ -5,8 +5,8 @@ import { formatOutputStreamToStore } from '@lira/store/message/formatters'
 import { LiraLogger } from '@lira/commons/utils/logger'
 import { LiraMessageInputStore } from '../..'
 import { PACKAGE_ENDPOINT } from '@endpoints'
-import { StoreAnthropic } from '@providers/anthropic/store/store'
-import { StoreOpenAI } from '@providers/openai/store/store'
+import { StoreAnthropic } from '@lira/store/anthropic/anthropic'
+import { StoreOpenAI } from '@lira/store/openai/openai'
 
 export class Store {
   public anthropic: StoreAnthropic

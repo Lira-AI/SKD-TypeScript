@@ -26,7 +26,15 @@
   "navigation": [
     {
       "group": "SDK",
-      "pages": ["why-lira", "getting-started", "message", "store"]
+      "pages": ["why-lira", "getting-started"]
+    },
+    {
+      "group": "Message",
+      "pages": ["message"]
+    },
+    {
+      "group": "Store",
+      "pages": ["store"]
     },
     {
       "group": "Message",
@@ -49,18 +57,9 @@
     {
       "group": "Store",
       "pages": [
-        {
-          "group": "Message",
-          "pages": ["sdk-references/store/message"]
-        },
-        {
-          "group": "Anthropic",
-          "pages": ["sdk-references/store/anthropic"]
-        },
-        {
-          "group": "OpenAI",
-          "pages": ["sdk-references/store/openai"]
-        }
+        "sdk-references/store/message",
+        "sdk-references/store/anthropic",
+        "sdk-references/store/openai"
       ]
     }
   ],
