@@ -1,7 +1,7 @@
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 import { Lira, LiraInstanceParams } from '..'
 import { LiraError } from '@lira/commons/utils/errors'
-import { formatMessageStreamToStore } from '@lira/store/message/formatters'
+import { formatOutputStreamToStore } from '@lira/store/message/formatters'
 import { LiraLogger } from '@lira/commons/utils/logger'
 import { LiraMessageInputStore } from '../..'
 import { PACKAGE_ENDPOINT } from '@endpoints'
@@ -37,7 +37,7 @@ export class Store {
   }): Promise<void> {
     try {
       const formattedOutput = input.stream
-        ? await formatMessageStreamToStore(
+        ? await formatOutputStreamToStore(
             output as AsyncIterable<LiraMessageOutput.Stream.Response>
           )
         : (output as LiraMessageOutput.Static.Response)

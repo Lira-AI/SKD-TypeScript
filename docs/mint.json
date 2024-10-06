@@ -19,32 +19,48 @@
   ],
   "tabs": [
     {
-      "name": "SDK reference",
-      "url": "sdk-reference"
+      "name": "SDK references",
+      "url": "sdk-references"
     }
   ],
   "navigation": [
     {
       "group": "SDK",
-      "pages": ["getting-started", "messages"]
+      "pages": ["why-lira", "getting-started", "message", "store"]
     },
     {
-      "group": "Messages",
+      "group": "Message",
       "pages": [
         {
           "group": "Create",
           "pages": [
-            "sdk-reference/messages/input",
+            "sdk-references/message/input",
             {
               "group": "Output",
               "pages": [
-                "sdk-reference/messages/output/static",
-                "sdk-reference/messages/output/stream"
+                "sdk-references/message/output/static",
+                "sdk-references/message/output/stream"
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "group": "Store",
+      "pages": [
+        {
+          "group": "Message",
+          "pages": ["sdk-references/store/message"]
         },
-        "sdk-reference/messages/store"
+        {
+          "group": "Anthropic",
+          "pages": ["sdk-references/store/anthropic"]
+        },
+        {
+          "group": "OpenAI",
+          "pages": ["sdk-references/store/openai"]
+        }
       ]
     }
   ],

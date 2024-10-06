@@ -1,11 +1,12 @@
 ---
 title: Output Static
+mode: 'wide'
 ---
 
-Passing `stream: false` to the `messages.create` method will return a single response object. This is the default behavior.
+Passing `stream: false` to the `message.create` method will return a single response object. This is the default behavior.
 
 ```typescript
-const res = await lira.messages.create({
+const res = await lira.message.create({
   [...]
   stream: false // Default value
   [...]
@@ -35,10 +36,11 @@ const res = await lira.messages.create({
 
 <ResponseField name="model" type="string" required>
   The model used to generate the response.
-  <br />
-  ℹ️ Usually the model is the same as the one used in the request. But in some
-  cases, the model name can be slightly different. It's best to prefer the input
-  model name, which stays consistent.
+  <Note>
+    Usually the model is the same as the one used in the request. But in some
+    cases, the model name can be slightly different. It's best to prefer the
+    input model name, which stays consistent.
+  </Note>
 </ResponseField>
 
 <ResponseField

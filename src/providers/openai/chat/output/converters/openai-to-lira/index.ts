@@ -1,7 +1,7 @@
 import { ChatCompletion, ChatCompletionChunk } from 'openai/resources'
 import { Stream } from 'openai/streaming'
 import { streamOutputConverter } from './stream'
-import { convertStream } from '@lira/messages/output/stream'
+import { convertStream } from '@lira/message/output/stream'
 import { LiraLogger } from '@lira/commons/utils/logger'
 import { staticOutputConverter } from './static'
 

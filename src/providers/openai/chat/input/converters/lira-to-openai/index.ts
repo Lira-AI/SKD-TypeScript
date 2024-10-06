@@ -7,7 +7,7 @@ import {
   ChatCompletionUserMessageParam,
 } from 'openai/resources'
 import { LiraError } from '@lira/commons/utils/errors'
-import { LiraMessageInput } from '@lira/messages/input/types'
+import { LiraMessageInput } from '@lira/message/input/types'
 
 export function chatInputLiraToOpenAI(
   inputParams: LiraMessageInput.Params

@@ -1,5 +1,5 @@
-import { LiraMessageInput } from '@lira/messages/input/types'
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageInput } from '@lira/message/input/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 
 export namespace LiraProviders {
   export const providers = ['Anthropic', 'OpenAI'] as const

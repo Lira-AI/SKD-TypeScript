@@ -1,10 +1,10 @@
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 import { ChatCompletionChunk } from 'openai/resources'
 import { formatStopReason } from './shared'
 import {
   ConverterFunction,
   StreamContext,
-} from '@lira/messages/output/stream/types'
+} from '@lira/message/output/stream/types'
 
 export const streamOutputConverter: ConverterFunction<ChatCompletionChunk> = ({
   output,

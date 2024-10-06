@@ -1,11 +1,12 @@
 ---
 title: Output Stream
+mode: 'wide'
 ---
 
-Passing `stream: true` to the `messages.create` method will return an async iterator that yields response objects.
+Passing `stream: true` to the `message.create` method will return an async iterator that yields response objects.
 
 ```typescript
-const res = await lira.messages.create({
+const res = await lira.message.create({
   [...]
   stream: true,
   [...]

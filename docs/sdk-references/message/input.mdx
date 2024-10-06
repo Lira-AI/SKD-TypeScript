@@ -1,24 +1,27 @@
 ---
 title: Input
+mode: 'wide'
 ---
 
 ```typescript
-const res = await lira.messages.create()
+const res = await lira.message.create()
 ```
 
 ## Options object
 
-👌 No matter the provider used the method takes the same options object. Switching `provider`
-is as easy as changing the `model` property.
+<Tip>
+  No matter the provider used the method takes the same options object.
+  Switching `provider` is as easy as changing the `model` property.
+</Tip>
 
 The following options are the object that you can pass to the `create` method.
 
 ```typescript
 {
+  lira?: LiraMetadata
   max_tokens?: number
   messages: Array<Message>
   model: AnthropicModels | OpenAIModels
-  metadata?: Metadata
   temperature?: number
   top_p?: number
   tools?: Array<Tool>
@@ -183,9 +186,9 @@ The following options are the object that you can pass to the `create` method.
   </Expandable>
 </ParamField>
 
-<ParamField body="metadata" name="metadata" type="Metadata">
-All this information are useful for tracking the usage of the API.<br/><br/>
-⚠️ Only if you set the `passIdToUnderlyingLLM` to `true`, the `endUser.id` will be passed to the underlying provider. Otherwise none of the information will be passed to the provider.
+<ParamField body="metadata" name="metadata" type="LiraMetadata">
+All this information are useful for tracking the usage of the API.
+<Note>Only if you set the `passIdToUnderlyingLLM` to `true`, the `endUser.id` will be passed to the underlying provider. Otherwise none of the information will be passed to the provider.</Note>
 ```typescript
 {
   endUser?: {
@@ -195,6 +198,10 @@ All this information are useful for tracking the usage of the API.<br/><br/>
   }
   sessionId?: string
   tags?: string[]
+  store?: {
+    enabled: boolean
+    callback?: LiraStore.Callback
+  }
 }
 ```
 </ParamField>
@@ -275,8 +282,7 @@ The choice of the tool to be used by the model.
 
 <ParamField body="openai_options" name="openai_options" type="OpenAIOptions">
 The following options are specific to the OpenAI models. This means that they will be ignored if you use another provider.
-<br />
-For more info about those options check [OpenAI docs](https://platform.openai.com/docs/api-reference/chat/create#chat-create-response_format)
+<Info>For more info about those options check [OpenAI docs](https://platform.openai.com/docs/api-reference/chat/create#chat-create-response_format)</Info>
 ```typescript
 {
   presence_penalty?: number
@@ -309,8 +315,7 @@ For more info about those options check [OpenAI docs](https://platform.openai.co
 
 <ParamField body="anthropic_options" name="anthropic_options" type="AnthropicOptions">
 The following options are specific to the Anthropic models. This means that they will be ignored if you use another provider.
-<br />
-For more info about those options check [Anthropic docs](https://docs.anthropic.com/en/api/messages)
+<Info>For more info about those options check [Anthropic docs](https://docs.anthropic.com/en/api/messages)</Info>
 ```typescript
 {
   top_k?: number

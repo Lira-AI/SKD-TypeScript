@@ -1,5 +1,5 @@
-import { LiraMessageInput as NS_LiraMessageInput } from '@lira/messages/input/types'
-import { LiraMessageOutput as NS_LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageInput as NS_LiraMessageInput } from '@lira/message/input/types'
+import { LiraMessageOutput as NS_LiraMessageOutput } from '@lira/message/output/types'
 import { LiraProviders as NS_LiraProviders } from '@providers/types'
 import { LiraStore } from '@lira/store/types'
 
@@ -19,7 +19,7 @@ export {
   OPENAI_MODELS,
   ANTHROPIC_MODELS,
   ROLES,
-} from '@lira/messages/commons/constants'
+} from '@lira/message/commons/constants'
 
 export { isAnthropicModel } from '@providers/anthropic/utils'
 export { isOpenAIModel } from '@providers/openai/utils'

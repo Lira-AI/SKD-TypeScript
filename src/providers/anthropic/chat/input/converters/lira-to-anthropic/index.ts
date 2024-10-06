@@ -2,7 +2,7 @@ import {
   MessageCreateParamsBase,
   MessageParam,
 } from '@anthropic-ai/sdk/resources/messages'
-import { LiraMessageInput } from '@lira/messages/input/types'
+import { LiraMessageInput } from '@lira/message/input/types'
 import { LiraError } from '@lira/commons/utils/errors'
 import { LiraLogger } from '@lira/commons/utils/logger'
 

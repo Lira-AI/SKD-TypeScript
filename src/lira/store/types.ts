@@ -1,6 +1,6 @@
 import { LiraProviders } from '@providers/types'
-import { LiraMessageOutput } from '@lira/messages/output/types'
-import { LiraMessageInput } from '@lira/messages/input/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
+import { LiraMessageInput } from '@lira/message/input/types'
 
 export namespace LiraStore {
   export type Callback = (data: MessageObj) => Promise<void>

@@ -9,7 +9,7 @@ import { LiraMessageOutput } from './output/types'
 import { Lira, LiraInstanceParams } from '..'
 import { LiraStore } from '@lira/store/types'
 
-export class Messages {
+export class Message {
   constructor(
     private readonly lira: Lira,
     private readonly keys: LiraInstanceParams['keys'],

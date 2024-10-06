@@ -1,5 +1,6 @@
 ---
 title: Getting started
+mode: 'wide'
 ---
 
 ## Installation
@@ -59,9 +60,9 @@ The `Lira` constructor accepts an options object with the following properties:
 Set the API keys for the providers you want to use
   <Expandable title="properties">
 
-    {/* <ParamField body="lira" name="lira" type="string">
+    <ParamField body="lira" name="lira" type="string">
       Lira API key (in case you want to use Lira store endpoint)
-    </ParamField> */}
+    </ParamField>
 
     <ParamField body="anthropic" name="anthropic" type="string">
       Anthropic API key
@@ -75,23 +76,25 @@ Set the API keys for the providers you want to use
 </ParamField>
 
 <ParamField body="store" name="keys" type="object">
-Options to configure the storing of the messages.
+Options to configure the storing of the message.
+<Note>These options can be override by the options of the `create` method.</Note>
   <Expandable title="properties">
 
-    <ParamField body="enabled" name="enabled" type="boolean" default="false">
-      Set to `true` to enable the storing of the messages.
+    <ParamField body="enabled" name="enabled" type="boolean" default="false" required>
+      Set to `true` to enable the storing of the message.
     </ParamField>
 
-    <ParamField body="callback" name="callback" type="(params: LiraMessageStore) => unkown" required>
-      Your custom callback to store the entire message object. The callback receives the following object as `params`:
-      ```typescript
-      {
-        input: LiraMessageInputStore
-        output?: LiraMessageOutputStore
-        reqTime?: LiraMessageReqTimesStore
-        error?: unknown
-      }
-      ```
+    <ParamField body="callback" name="callback" type="(params: LiraMessageStore) => unkown">
+    Only if you want to use your custom callback to store the entire message object. The callback receives the following object as `params`:
+    ```typescript
+    {
+      input: LiraMessageInputStore
+      output?: LiraMessageOutputStore
+      reqTime?: LiraMessageReqTimesStore
+      error?: unknown
+    }
+    ```
+    Visit the [store reference](/sdk-references/store/message#params) for more information.
     </ParamField>
 
   </Expandable>
