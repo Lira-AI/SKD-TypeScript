@@ -29,12 +29,8 @@
       "pages": ["why-lira", "getting-started"]
     },
     {
-      "group": "Message",
-      "pages": ["message"]
-    },
-    {
-      "group": "Store",
-      "pages": ["store"]
+      "group": "Modes",
+      "pages": ["modes/generate", "modes/generate-and-store", "modes/store"]
     },
     {
       "group": "Message",

@@ -1,0 +1,33 @@
+---
+title: Generate
+mode: 'wide'
+---
+
+## Why use the generate mode?
+
+<Card title="Unified API" icon="circles-overlap" horizontal="true">
+  Same API for all supported LLM providers. Switch between providers without
+  changing a single line of code. Just change the model name.
+</Card>
+
+<Card title="No vendor lock-in" icon="lock-open" horizontal="true">
+  Easily switch between various providers without vendor lock-in. The unified
+  interface abstracts away differences between provider APIs, allowing seamless
+  integration with various LLMs.
+</Card>
+
+## How it works
+
+## Create a new message
+
+The `create` method generates a new message based on the options provided.
+
+```typescript
+import { Lira } from 'lira'
+
+const lira = new Lira()
+
+const res = await lira.message.create()
+```
+
+See the [SDK references](/sdk-reference/messages/input) for more details.

@@ -3,16 +3,22 @@ title: Getting started
 mode: 'wide'
 ---
 
-<CardGroup cols={2}>
-  <Card title="Generate and store" icon="bolt-auto" href="/message">
-    Use Lira to generate responses and store them seamlessly. Simply select one
-    of the supported LLM providers to create and save messages in one integrated
-    step
+## Mode
+
+After creating an instance of the `Lira` class, you can use it in three different modes:
+
+<CardGroup cols={3}>
+  <Card title="Generate" icon="sparkles" href="/message">
+    Generate responses without storage. Switch supported LLMs changing the model
+    name
+  </Card>
+  <Card title="Generate and store" icon="bolt" href="/message">
+    Generate and store messages seamlessly in one integrated step. Best of both
+    worlds
   </Card>
   <Card title="Store" icon="rectangle-history-circle-plus" href="/store">
-    Leverage any LLM provider directly to generate responses while using Lira
-    solely for storing messages. This option offers flexibility by separating
-    generation and storage functions
+    Use any LLM provider to generate responses while using Lira solely for
+    storing messages
   </Card>
 </CardGroup>
 
