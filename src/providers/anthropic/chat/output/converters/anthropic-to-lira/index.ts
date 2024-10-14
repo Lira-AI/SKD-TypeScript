@@ -1,6 +1,6 @@
 import { Message, RawMessageStreamEvent } from '@anthropic-ai/sdk/resources'
 import { Stream } from '@anthropic-ai/sdk/streaming'
-import { convertStream } from '@lira/messages/output/stream'
+import { convertStream } from '@lira/message/output/stream'
 import { streamOutputConverter } from './stream'
 import { aggregator, endBuffering, startBuffering } from '../../utils/buffer'
 import { filterMessageStopType } from '../../utils/filter'

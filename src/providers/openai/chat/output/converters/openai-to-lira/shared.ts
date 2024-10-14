@@ -1,5 +1,5 @@
 import { ChatCompletion, ChatCompletionChunk } from 'openai/resources'
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 
 export function formatStopReason(
   finishReason: ChatCompletion.Choice['finish_reason']

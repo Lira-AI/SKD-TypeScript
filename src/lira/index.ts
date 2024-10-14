@@ -1,6 +1,6 @@
 import { LiraCommons } from './commons/types'
 import { LiraLogger } from './commons/utils/logger'
-import { Messages } from './messages/messages'
+import { Message } from './message/message'
 import { Store } from './store/store'
 import { LiraStore } from './store/types'
 
@@ -15,13 +15,13 @@ export type LiraInstanceParams = {
     config?: LiraCommons.LoggerConfig
   }
   store?: {
-    enabled: boolean
+    disabled?: boolean
     callback?: LiraStore.Callback
   }
 }
 
 export class Lira {
-  public messages: Messages
+  public message: Message
 
   public store: Store
 
@@ -31,7 +31,7 @@ export class Lira {
       loggers: params.loggers?.config,
     })
 
-    this.messages = new Messages(this, params.keys, params.store)
+    this.message = new Message(this, params.keys, params.store)
     this.store = new Store(this, params.store, params.keys.lira)
   }
 }

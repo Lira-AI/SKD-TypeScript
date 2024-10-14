@@ -1,5 +1,5 @@
 import { RawMessageDeltaEvent } from '@anthropic-ai/sdk/resources'
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 
 export function formatStopReason(
   stopReason: RawMessageDeltaEvent.Delta['stop_reason']

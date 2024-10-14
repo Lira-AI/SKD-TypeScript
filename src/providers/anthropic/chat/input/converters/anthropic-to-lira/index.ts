@@ -3,7 +3,7 @@ import {
   MessageParam,
 } from '@anthropic-ai/sdk/resources/messages'
 import { LiraError } from '@lira/commons/utils/errors'
-import { LiraMessageInput } from '@lira/messages/input/types'
+import { LiraMessageInput } from '@lira/message/input/types'
 import { isAnthropicModel } from '@providers/anthropic/utils'
 
 export function chatInputAntrhopicToLira(

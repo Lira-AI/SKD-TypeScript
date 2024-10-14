@@ -1,5 +1,5 @@
 import { LiraError } from '@lira/commons/utils/errors'
-import { LiraMessageInput } from '@lira/messages/input/types'
+import { LiraMessageInput } from '@lira/message/input/types'
 import { isOpenAIModel } from '@providers/openai/utils'
 import OpenAI from 'openai'
 

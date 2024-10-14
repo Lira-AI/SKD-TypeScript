@@ -1,5 +1,5 @@
 import { RawMessageStreamEvent } from '@anthropic-ai/sdk/resources'
-import { FilterFunction } from '@lira/messages/output/stream/types'
+import { FilterFunction } from '@lira/message/output/stream/types'
 
 export const filterMessageStopType: FilterFunction<RawMessageStreamEvent> = ({
   item,

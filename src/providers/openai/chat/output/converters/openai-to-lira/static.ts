@@ -1,5 +1,5 @@
 import { ChatCompletion } from 'openai/resources'
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 import { formatStopReason } from './shared'
 
 export function staticOutputConverter(

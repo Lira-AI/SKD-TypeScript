@@ -10,7 +10,7 @@ export namespace LiraCommons {
    */
   export type Logger = 'prod' | 'debug'
 
-  type LogCallback = (...messages: Array<string>) => void
+  type LogCallback = (message: string) => void
 
   type ExcludeOthers = {
     all: LogCallback

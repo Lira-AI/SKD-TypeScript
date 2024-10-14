@@ -6,9 +6,9 @@ import {
   RawMessageStartEvent,
   RawMessageStopEvent,
 } from '@anthropic-ai/sdk/resources'
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 import { formatStopReason } from './shared'
-import { ConverterFunction } from '@lira/messages/output/stream/types'
+import { ConverterFunction } from '@lira/message/output/stream/types'
 
 export const streamOutputConverter: ConverterFunction<
   | RawMessageStartEvent

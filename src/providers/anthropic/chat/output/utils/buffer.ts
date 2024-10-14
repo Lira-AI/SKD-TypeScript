@@ -1,9 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { LiraMessageOutput } from '@lira/messages/output/types'
+import { LiraMessageOutput } from '@lira/message/output/types'
 import {
   AggregateFunction,
   BufferingBeweenFunction,
-} from '@lira/messages/output/stream/types'
+} from '@lira/message/output/stream/types'
 import { isEmptyObject } from '@lira/commons/utils/object'
 
 export const startBuffering: BufferingBeweenFunction<

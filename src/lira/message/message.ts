@@ -9,7 +9,7 @@ import { LiraMessageOutput } from './output/types'
 import { Lira, LiraInstanceParams } from '..'
 import { LiraStore } from '@lira/store/types'
 
-export class Messages {
+export class Message {
   constructor(
     private readonly lira: Lira,
     private readonly keys: LiraInstanceParams['keys'],
@@ -32,7 +32,9 @@ export class Messages {
   > {
     let formattedInput: LiraStore.InputStore = input
 
-    const isToStore = input.lira?.store?.enabled ?? this.store?.enabled
+    const isToStore =
+      (!input.lira?.store?.disabled || input.lira?.store?.callback) ??
+      (!this.store?.disabled || this.store?.callback)
 
     try {
       if (isAnthropicModel(input.model)) {

@@ -1,7 +1,7 @@
-import { LiraMessageOutput } from '../../messages/output/types'
+import { LiraMessageOutput } from '../../message/output/types'
 import { LiraStore } from '../types'
 
-export async function formatMessageStreamToStore(
+export async function formatOutputStreamToStore(
   output: AsyncIterable<LiraMessageOutput.Stream.Response>
 ): Promise<Omit<LiraStore.OutputStore, 'reqTimes'>> {
   const formattedOutputMessages: Array<LiraMessageOutput.Stream.Response> = []
