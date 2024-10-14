@@ -5,29 +5,52 @@ mode: 'wide'
 
 ## Why use the generate mode?
 
+You can use the `generate` mode to generate responses from different LLM providers using the same API. This mode is ideal for scenarios where you want to generate responses from different LLM providers without storing the messages.
+
 <Card title="Unified API" icon="circles-overlap" horizontal="true">
   Same API for all supported LLM providers. Switch between providers without
-  changing a single line of code. Just change the model name.
+  changing a single line of code. Our API abstracts provider differences,
+  ensuring uniform input and output formats across all providers.
 </Card>
 
 <Card title="No vendor lock-in" icon="lock-open" horizontal="true">
   Easily switch between various providers without vendor lock-in. The unified
   interface abstracts away differences between provider APIs, allowing seamless
-  integration with various LLMs.
+  changes between various LLMs.
 </Card>
 
-## How it works
+## Generate a new message without storing it
 
-## Create a new message
+When creating a new message, you can use the `create` method to generate a response from the LLM provider. By default the storing option is enabled, which means the message request and response will be stored ([Store mode](/modes/store)). To disable storing the message, you can set the `store.disabled` option to `true`.
 
-The `create` method generates a new message based on the options provided.
+#### Disable storing `globally`:
+
+```typescript
+import { Lira } from 'lira'
+
+const lira = new Lira({
+  store: {
+    disabled: false,
+  },
+})
+
+const res = await lira.message.create()
+```
+
+#### Disable storing `per-request`:
 
 ```typescript
 import { Lira } from 'lira'
 
 const lira = new Lira()
 
-const res = await lira.message.create()
+const res = await lira.message.create({
+  lira: {
+    store: {
+      disabled: false,
+    },
+  },
+})
 ```
 
 See the [SDK references](/sdk-reference/messages/input) for more details.

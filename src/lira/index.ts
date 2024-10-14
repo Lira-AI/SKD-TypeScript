@@ -15,7 +15,7 @@ export type LiraInstanceParams = {
     config?: LiraCommons.LoggerConfig
   }
   store?: {
-    enabled: boolean
+    disabled?: boolean
     callback?: LiraStore.Callback
   }
 }

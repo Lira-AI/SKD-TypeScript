@@ -26,11 +26,14 @@
   "navigation": [
     {
       "group": "SDK",
-      "pages": ["why-lira", "getting-started"]
-    },
-    {
-      "group": "Modes",
-      "pages": ["modes/generate", "modes/generate-and-store", "modes/store"]
+      "pages": [
+        "why-lira",
+        "getting-started",
+        {
+          "group": "Modes",
+          "pages": ["modes/generate", "modes/generate-and-store", "modes/store"]
+        }
+      ]
     },
     {
       "group": "Message",

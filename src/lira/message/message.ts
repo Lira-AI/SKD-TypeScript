@@ -32,7 +32,9 @@ export class Message {
   > {
     let formattedInput: LiraStore.InputStore = input
 
-    const isToStore = input.lira?.store?.enabled ?? this.store?.enabled
+    const isToStore =
+      (!input.lira?.store?.disabled || input.lira?.store?.callback) ??
+      (!this.store?.disabled || this.store?.callback)
 
     try {
       if (isAnthropicModel(input.model)) {

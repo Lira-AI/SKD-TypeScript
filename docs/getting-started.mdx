@@ -8,17 +8,17 @@ mode: 'wide'
 After creating an instance of the `Lira` class, you can use it in three different modes:
 
 <CardGroup cols={3}>
-  <Card title="Generate" icon="sparkles" href="/message">
-    Generate responses without storage. Switch supported LLMs changing the model
-    name
+  <Card title="Generate" icon="message-plus" href="/message">
+    Diverse LLMs, same API. Generate responses and switch LLM provider only
+    changing the model name
   </Card>
-  <Card title="Generate and store" icon="bolt" href="/message">
+  <Card title="Generate and store" icon="sparkles" href="/message">
     Generate and store messages seamlessly in one integrated step. Best of both
-    worlds
+    generate and store modes
   </Card>
   <Card title="Store" icon="rectangle-history-circle-plus" href="/store">
     Use any LLM provider to generate responses while using Lira solely for
-    storing messages
+    storing messages in a structured way
   </Card>
 </CardGroup>
 
@@ -99,8 +99,8 @@ Options to configure the storing of the message.
 <Note>These options can be override by the options of the `create` method.</Note>
   <Expandable title="properties">
 
-    <ParamField body="enabled" name="enabled" type="boolean" default="false" required>
-      Set to `true` to enable the storing of the message.
+    <ParamField body="disabled" name="disabled" type="boolean" default="false">
+      Set to `true` to disable storing messages.
     </ParamField>
 
     <ParamField body="callback" name="callback" type="(params: LiraMessageStore) => Promise<void> | void">
