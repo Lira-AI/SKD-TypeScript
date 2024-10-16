@@ -25,7 +25,7 @@ export const anthropicChat: LiraProviders.Chat = async (
     )
   }
 
-  const res = await anthropic.message.create(formattedInput)
+  const res = await anthropic.messages.create(formattedInput)
 
   const end = Date.now()
 

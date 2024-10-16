@@ -1,16 +1,19 @@
-import { Lira } from '@lira/index'
+import { LiraInstanceParams } from '@lira/index'
 import { LiraStore } from '@lira/store/types'
-import { chatInputOpenAIToLira } from '@providers/openai/chat/input/converters/openai-to-lira'
-import { chatOutputOpenAIToLira } from '@providers/openai/chat/output/converters/openai-to-lira'
+import { storeMessage } from '@lira/store/utils/store'
 import {
-  ChatCompletion,
-  ChatCompletionChunk,
-  ChatCompletionCreateParams,
-} from 'openai/resources'
+  chatInputOpenAIToLira,
+  OpenAIMessageInput,
+} from '@providers/openai/chat/input/converters/openai-to-lira'
+import { chatOutputOpenAIToLira } from '@providers/openai/chat/output/converters/openai-to-lira'
+import { ChatCompletion, ChatCompletionChunk } from 'openai/resources'
 import { Stream } from 'openai/streaming'
 
 export class StoreOpenAI {
-  constructor(private readonly lira: Lira) {}
+  constructor(
+    private readonly store: LiraInstanceParams['store'],
+    private readonly liraAPIKey?: string
+  ) {}
 
   async message({
     input,
@@ -18,7 +21,7 @@ export class StoreOpenAI {
     reqTime,
     error,
   }: {
-    input: ChatCompletionCreateParams
+    input: OpenAIMessageInput
     output?: Stream<ChatCompletionChunk> | ChatCompletion
     reqTime?: LiraStore.ReqTimesStore
     error?: unknown
@@ -32,11 +35,13 @@ export class StoreOpenAI {
         })
       : undefined
 
-    return this.lira.store.message({
+    return storeMessage({
       input: formattedInput,
       output: formattedOutput,
       reqTime,
       error,
+      store: this.store,
+      liraAPIKey: this.liraAPIKey,
     })
   }
 }

@@ -3,8 +3,16 @@ import { LiraMessageInput } from '@lira/message/input/types'
 import { isOpenAIModel } from '@providers/openai/utils'
 import OpenAI from 'openai'
 
+export type OpenAIMessageInput = OpenAI.Chat.ChatCompletionCreateParams & {
+  lira: {
+    endUser: Omit<LiraMessageInput.LiraMetadataEndUser, 'passIdToUnderlyingLLM'>
+    sessionId?: LiraMessageInput.LiraMetadata['sessionId']
+    tags?: LiraMessageInput.LiraMetadata['tags']
+  }
+}
+
 export function chatInputOpenAIToLira(
-  inputParams: OpenAI.Chat.ChatCompletionCreateParams
+  inputParams: OpenAIMessageInput
 ): LiraMessageInput.Params {
   if (!isOpenAIModel(inputParams.model)) {
     throw new LiraError(`Unsupported model: ${inputParams.model}`)
@@ -15,12 +23,16 @@ export function chatInputOpenAIToLira(
     messages: formatInputMessages(inputParams),
     model: inputParams.model as LiraMessageInput.Params['model'],
     lira: {
-      ...(inputParams.user && {
-        endUser: {
-          passIdToUnderlyingLLM: true,
-          id: inputParams.user,
-        },
-      }),
+      ...(inputParams.user
+        ? {
+            ...inputParams.lira,
+            endUser: {
+              ...inputParams.lira.endUser,
+              id: inputParams.user,
+              passIdToUnderlyingLLM: true,
+            },
+          }
+        : inputParams.lira),
     },
     stop_sequences:
       (typeof inputParams.stop === 'string'

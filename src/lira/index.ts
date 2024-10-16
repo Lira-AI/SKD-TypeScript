@@ -31,7 +31,7 @@ export class Lira {
       loggers: params.loggers?.config,
     })
 
-    this.message = new Message(this, params.keys, params.store)
-    this.store = new Store(this, params.store, params.keys.lira)
+    this.message = new Message(params.store, params.keys)
+    this.store = new Store(params.store, params.keys.lira)
   }
 }

@@ -20,7 +20,6 @@
     "lint": "eslint --ext .ts .",
     "format": "prettier --write .",
     "branch-clean": "git pull -a && git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d",
-    "dev-docs": "cd docs && mintlify dev",
     "deploy": "yarn build && yarn changeset && yarn changeset version && yarn changeset publish"
   },
   "devDependencies": {

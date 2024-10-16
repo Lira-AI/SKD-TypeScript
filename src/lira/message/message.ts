@@ -6,14 +6,14 @@ import { LiraError } from '@lira/commons/utils/errors'
 import { LiraMessageInput } from './input/types'
 import { tee } from './output/stream/utils/tee'
 import { LiraMessageOutput } from './output/types'
-import { Lira, LiraInstanceParams } from '..'
+import { LiraInstanceParams } from '..'
 import { LiraStore } from '@lira/store/types'
+import { storeMessage } from '@lira/store/utils/store'
 
 export class Message {
   constructor(
-    private readonly lira: Lira,
-    private readonly keys: LiraInstanceParams['keys'],
-    private readonly store: LiraInstanceParams['store']
+    private readonly store: LiraInstanceParams['store'],
+    private readonly keys: LiraInstanceParams['keys']
   ) {}
 
   async create(
@@ -74,10 +74,12 @@ export class Message {
 
         if (isToStore) {
           // not await to avoid blocking the main thread
-          this.lira.store.message({
+          storeMessage({
             input: formattedInput,
             output: resToStore,
             reqTime,
+            store: this.store,
+            liraAPIKey: this.keys.lira,
           })
         }
 
@@ -119,10 +121,12 @@ export class Message {
 
         if (isToStore) {
           // not await to avoid blocking the main thread
-          this.lira.store.message({
+          storeMessage({
             input: formattedInput,
             output: resToStore,
             reqTime,
+            store: this.store,
+            liraAPIKey: this.keys.lira,
           })
         }
 
@@ -133,9 +137,11 @@ export class Message {
     } catch (error) {
       if (isToStore) {
         // not await to avoid blocking the main thread
-        this.lira.store.message({
+        storeMessage({
           input: formattedInput,
           error,
+          store: this.store,
+          liraAPIKey: this.keys.lira,
         })
       }
 

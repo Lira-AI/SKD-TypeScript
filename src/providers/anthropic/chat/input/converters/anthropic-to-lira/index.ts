@@ -6,8 +6,16 @@ import { LiraError } from '@lira/commons/utils/errors'
 import { LiraMessageInput } from '@lira/message/input/types'
 import { isAnthropicModel } from '@providers/anthropic/utils'
 
+export type AnthropicMessageInput = MessageCreateParamsBase & {
+  lira: {
+    endUser: Omit<LiraMessageInput.LiraMetadataEndUser, 'passIdToUnderlyingLLM'>
+    sessionId?: LiraMessageInput.LiraMetadata['sessionId']
+    tags?: LiraMessageInput.LiraMetadata['tags']
+  }
+}
+
 export function chatInputAntrhopicToLira(
-  inputParams: MessageCreateParamsBase
+  inputParams: AnthropicMessageInput
 ): LiraMessageInput.Params {
   if (!isAnthropicModel(inputParams.model)) {
     throw new LiraError(`Unsupported model: ${inputParams.model}`)
@@ -18,12 +26,16 @@ export function chatInputAntrhopicToLira(
     messages: formatInputMessages(inputParams),
     model: inputParams.model as LiraMessageInput.Params['model'],
     lira: {
-      ...(inputParams.metadata?.user_id && {
-        endUser: {
-          passIdToUnderlyingLLM: true,
-          id: inputParams.metadata.user_id,
-        },
-      }),
+      ...(inputParams.metadata?.user_id
+        ? {
+            ...inputParams.lira,
+            endUser: {
+              ...inputParams.lira.endUser,
+              id: inputParams.metadata.user_id,
+              passIdToUnderlyingLLM: true,
+            },
+          }
+        : inputParams.lira),
     },
     stop_sequences: inputParams.stop_sequences,
     stream: inputParams.stream,

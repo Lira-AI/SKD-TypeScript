@@ -3,12 +3,14 @@ import { ANTHROPIC_MODELS, OPENAI_MODELS, ROLES } from '../commons/constants'
 import { LiraMessage } from '../commons/types'
 
 export namespace LiraMessageInput {
+  export type LiraMetadataEndUser = {
+    id: string
+    name?: string
+    passIdToUnderlyingLLM?: boolean
+  }
+
   export type LiraMetadata = {
-    endUser?: {
-      id: string
-      name?: string
-      passIdToUnderlyingLLM?: boolean
-    }
+    endUser?: LiraMetadataEndUser
     sessionId?: string
     tags?: string[]
     store?: LiraInstanceParams['store']

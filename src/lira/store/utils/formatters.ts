@@ -1,5 +1,5 @@
-import { LiraMessageOutput } from '../../message/output/types'
-import { LiraStore } from '../types'
+import { LiraMessageOutput } from '@lira/message/output/types'
+import { LiraStore } from '@lira/store/types'
 
 export async function formatOutputStreamToStore(
   output: AsyncIterable<LiraMessageOutput.Stream.Response>
