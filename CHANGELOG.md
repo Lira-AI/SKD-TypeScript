@@ -1,5 +1,11 @@
 # lira
 
+## 0.14.0
+
+### Minor Changes
+
+- revised storing methods and optimized code
+
 ## 0.13.0
 
 ### Minor Changes
