@@ -1,3 +1,11 @@
+# What is Lira?
+
+Lira is an **open-source** SDK that lets you **store** every LLM interaction in a structured format to **test and optimize** your AI integrations based on data-driven insights. It also provides a unified API to **generate** responses with any LLM provider.
+
+You can chose to store data in your own database, ensuring it never leaves your server, or through the Lira dashboard for clear visibility and performance tracking across LLMs interactions.
+
+The unified API lets you switch LLM providers simply by changing the model name, without ever modifying your code. Focus on building your application using the **best LLM provider** for your needs.
+
 # Getting started
 
 Go to the Official Documentation for a complete guide
@@ -6,30 +14,22 @@ Go to the Official Documentation for a complete guide
 ## Installation
 
 ```bash
-# yarn
 yarn add lira
 
-# pnpm
 pnpm add lira
 
-# npm
 npm install lira
 ```
 
-## Prerequisites
+## Modes
 
-Make sure to install the SDK of the providers you want to use:
+Lira offers various modes and exceptional flexibility. Select the one that best suits your needs:
 
-```bash
-# yarn
-yarn add openai
-yarn add @anthropic-ai/sdk
+- **Store** Use any LLM provider to generate responses while using Lira solely for
+  storing messages in a structured way.
 
-# pnpm
-pnpm add openai
-pnpm add @anthropic-ai/sdk
+- **Generate and store** Generate and store messages seamlessly in one integrated step. Best of both
+  generate and store modes.
 
-# npm
-npm install openai
-npm install @anthropic-ai/sdk
-```
+- **Generate** Diverse LLMs, same API. Generate responses and switch LLM provider only by
+  changing the model name.
